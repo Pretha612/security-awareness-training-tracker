@@ -1,0 +1,24 @@
+# Use OpenJDK 21 as base image
+FROM eclipse-temurin:21-jdk
+
+# Set working directory
+WORKDIR /app
+
+# Copy Maven wrapper and pom.xml first for better caching
+COPY backend/mvnw backend/.mvn backend/pom.xml ./
+COPY backend/.mvn .mvn
+
+# Download dependencies (this layer will be cached if pom.xml doesn't change)
+RUN ./mvnw dependency:go-offline -B
+
+# Copy the rest of the backend source
+COPY backend/src ./src
+
+# Build the application
+RUN ./mvnw clean package -DskipTests
+
+# Expose port
+EXPOSE 8080
+
+# Run the application
+CMD ["java", "-jar", "target/*.jar"]

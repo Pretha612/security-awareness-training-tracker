@@ -1,0 +1,40 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node modules (will be installed in container)
+frontend/node_modules
+frontend/dist
+
+# Maven
+backend/target
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+deploy.*
+
+# Temporary files
+*.tmp
+*.bak
